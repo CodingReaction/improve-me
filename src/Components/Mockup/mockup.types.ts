@@ -1,13 +1,13 @@
 export enum GOAL_KIND {
-    POSSITIVE, NEGATIVE
+    POSSITIVE = "possitive", NEGATIVE="negative"
 };
 
 export enum GOAL_STATUS {
-    ACHIEVED,
-    CANCELED,
-    IN_PROGRESS,
-    NOT_STARTED,
-    ON_PAUSE,
+    ACHIEVED="achieved",
+    CANCELED="canceled",
+    IN_PROGRESS="In progress",
+    NOT_STARTED="not started",
+    ON_PAUSE="on pause",
 };
 
 export type Goal = {

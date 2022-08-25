@@ -16,6 +16,7 @@ export default function Mockup() {
   const [goals, setGoals] = useState<Goal[]>(MOCKUP_DATA["goals"]);
   const [lastID, updateLastID] = useState(1);
 
+  const [isDragActive, setIsDragActive] = useState(false);
   const itemOnDrag = useRef<Goal | null>(null);
   const cellToDrop = useRef<number | null>(null);
 
@@ -32,16 +33,22 @@ export default function Mockup() {
     const itemOnCell = findItemOnCellNumber(goals, i);
     gridItems.push(
       <div
-        className={`goals-section__grid__item`}
+        className={`goals-section__grid__item ${
+          itemOnCell === null && isDragActive ? "drop-zone" : ""
+        }`}
         key={i}
         draggable={itemOnCell !== null}
         onDragStart={(e) => {
-          if (itemOnCell !== null) itemOnDrag.current = itemOnCell;
+          if (itemOnCell !== null) {
+            setIsDragActive(true);
+            itemOnDrag.current = itemOnCell;
+          }
         }}
         onDragEnter={(e) => {
           cellToDrop.current = i;
         }}
         onDragEnd={(e) => {
+          setIsDragActive(false);
           console.log(
             "Cell to drop",
             cellToDrop.current,

@@ -1,19 +1,27 @@
+:root {
+  --tone-xd: #06010f;
+  --tone-d: rgb(21, 18, 22);
+  --tone-m: #b41e1e;
+  --tone-l: #ed414f;
+  --tone-xl: #faa237;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-header {
-  background: #333;
-  padding: 20px;
-  color: #ccc;
-  width: 100%;
-  position: relative;
+body {
+  background: var(--tone-xd);
 }
 
-body {
-  background: rgb(207, 192, 211);
+header {
+  background: var(--tone-d);
+  padding: 20px;
+  color: var(--tone-xl);
+  width: 100%;
+  position: relative;
 }
 
 .goals-section__grid {
@@ -29,10 +37,19 @@ body {
 }
 
 .goals-section__grid__item {
-  border: 1px solid black;
+  border: 1px solid var(--tone-xd);
+  background: var(--tone-xl);
+  color: var(--tone-xd);
   border-radius: 10px;
-  height: 32px;
-  background: white;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.goals-section__grid__item:hover {
+  outline: 3px solid var(--tone-l);
 }
 
 .goals-section__grid__item * {
@@ -51,4 +68,23 @@ form {
 
 form > * {
   margin: 5px 0;
+}
+
+/* Utilities */
+@keyframes drop-zone-loop {
+  from {
+    background: var(--tone-xl);
+    border: 2px solid var(--tone-xd);
+  }
+  to {
+    background: var(--tone-xd);
+    border: 2px solid var(--tone-xl);
+  }
+}
+
+.drop-zone {
+  animation-name: drop-zone-loop;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 1s;
 }

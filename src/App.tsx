@@ -1,9 +1,6 @@
 import Mockup from "../src/Components/Mockup/Mockup";
 function App() {
-
-  return (
-      <Mockup />
-  )
+  return <Mockup />;
 }
 
-export default App
+export default App;

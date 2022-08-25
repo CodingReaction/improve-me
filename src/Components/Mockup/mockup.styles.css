@@ -1,54 +1,54 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-header{
-    background: #333;
-    padding: 20px;
-    color: #ccc;
-    width: 100%;
-    position: relative;
+header {
+  background: #333;
+  padding: 20px;
+  color: #ccc;
+  width: 100%;
+  position: relative;
 }
 
-body{
-    background: rgb(207, 192, 211);
+body {
+  background: rgb(207, 192, 211);
 }
 
-.goals-section__grid{
-    display: grid;
-    width: 90vw;
-    height: 600px;
-    column-gap: 10px;
-    padding: 5px;
-    left: 50%;
-    top: 20px;
-    transform: translateX(-50%);
-    position: relative;
+.goals-section__grid {
+  display: grid;
+  width: 90vw;
+  height: 600px;
+  column-gap: 10px;
+  padding: 5px;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  position: relative;
 }
 
-.goals-section__grid__item{
-    border: 1px solid black;
-    border-radius: 10px;
-    height: 32px;
-    background: white;
+.goals-section__grid__item {
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 32px;
+  background: white;
 }
 
-.goals-section__grid__item *{
-    text-align: center;
+.goals-section__grid__item * {
+  text-align: center;
 }
 
 /* TODO: Aply BEAM */
-form{
-    background: rgba(58, 59, 67, 0.878);
-    color: white;
-    border: 1px solid #ccc;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
+form {
+  background: rgba(58, 59, 67, 0.878);
+  color: white;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 form > * {
-    margin: 5px 0;
+  margin: 5px 0;
 }

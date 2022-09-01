@@ -1,5 +1,11 @@
-import { Goal, GOAL_KIND, GOAL_STATUS } from "./mockup.types";
+// React
 import { useState, useMemo, ChangeEvent } from "react";
+// Types
+import {
+  Goal,
+  GOAL_KIND,
+  GOAL_STATUS,
+} from "./../../../Auxiliar/Types/goal.types";
 
 // TODO: extract reusable parts and logic for goal creation and edition form
 export function CreateGoalComponent({ onGoalCreate }: { onGoalCreate: any }) {

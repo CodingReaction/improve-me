@@ -1,42 +1,44 @@
-import React, { useState, useEffect, useRef } from "react";
-import { GOAL_KIND, GOAL_STATUS, Goal } from "./mockup.types";
-import { validateNewGoalData } from "./validators";
+//React
+import React from "react";
+//Types
+import { Goal } from "./../../../../Auxiliar/Types/goal.types";
+//Components
+import {
+  CreateGoalComponent,
+  GoalComponent,
+} from "./../../../../Components/Forms/GoalForms/GoalForms";
+//Validators
+import { validateNewGoalData } from "./../../../../Auxiliar/Validators/goal.validators";
 
-import { CreateGoalComponent, GoalComponent } from "./GoalForms";
-
-import MOCKUP_DATA from "./mock_data";
-import "./mockup.styles.css";
-
-const GRID_SIZE = {
-  COLUMNS: 8,
-  ROWS: 8,
+type GridItemType = {
+  index: number;
+  itemOnCell: Goal | null;
+  cellToDrop: React.MutableRefObject<number | null>;
+  isDragActive: boolean;
+  setIsDragActive: React.Dispatch<React.SetStateAction<boolean>>;
+  itemOnDrag: React.MutableRefObject<Goal | null>;
+  setGoals: React.Dispatch<React.SetStateAction<Goal[]>>;
+  lastID: number;
+  updateLastID: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function Mockup() {
-  const [goals, setGoals] = useState<Goal[]>(MOCKUP_DATA["goals"]);
-  const [lastID, updateLastID] = useState(1);
-
-  const [isDragActive, setIsDragActive] = useState(false);
-  const itemOnDrag = useRef<Goal | null>(null);
-  const cellToDrop = useRef<number | null>(null);
-
-  function findItemOnCellNumber(goals: Goal[], cell: number): Goal | null {
-    const item = goals.find((goal) => goal.cell_number === cell);
-    if (item === undefined) return null;
-    return item;
-  }
-
-  //TODO: optimize to avoid O(n*m iterations)
-  // Probably transform to table with tr and td
-  const gridItems = [];
-  for (let i = 0; i < GRID_SIZE.COLUMNS * GRID_SIZE.ROWS; i++) {
-    const itemOnCell = findItemOnCellNumber(goals, i);
-    gridItems.push(
+const GridItem = React.memo(
+  ({
+    index,
+    itemOnCell,
+    cellToDrop,
+    isDragActive,
+    setIsDragActive,
+    itemOnDrag,
+    setGoals,
+    lastID,
+    updateLastID,
+  }: GridItemType) => {
+    return (
       <div
         className={`goals-section__grid__item ${
           itemOnCell === null && isDragActive ? "drop-zone" : ""
         }`}
-        key={i}
         draggable={itemOnCell !== null}
         onDragStart={(e) => {
           if (itemOnCell !== null) {
@@ -45,7 +47,7 @@ export default function Mockup() {
           }
         }}
         onDragEnter={(e) => {
-          cellToDrop.current = i;
+          cellToDrop.current = index;
         }}
         onDragEnd={(e) => {
           setIsDragActive(false);
@@ -55,7 +57,7 @@ export default function Mockup() {
             "Item on drag",
             itemOnDrag.current
           );
-          if (cellToDrop.current !== i && itemOnDrag.current !== null) {
+          if (cellToDrop.current !== index && itemOnDrag.current !== null) {
             const c2d = cellToDrop.current as number;
             setGoals((prevGoals) => {
               const updatedGoals = [...prevGoals];
@@ -84,9 +86,9 @@ export default function Mockup() {
                 console.log(newGoalData);
                 setGoals((prevGoals: Goal[]) => [
                   ...prevGoals,
-                  { ...newGoalData, id: lastID, cell_number: i },
+                  { ...newGoalData, id: lastID, cell_number: index },
                 ]);
-                updateLastID((prevID) => prevID + 1);
+                updateLastID((prevID: number) => prevID + 1);
               } catch (err) {
                 console.error(err);
               }
@@ -96,22 +98,6 @@ export default function Mockup() {
       </div>
     );
   }
+);
 
-  return (
-    <div>
-      <header>
-        <h1> GOALS TRACKER</h1>
-      </header>
-      <section className="goals-section">
-        <div
-          className="goals-section__grid"
-          style={{
-            gridTemplateColumns: `repeat(${GRID_SIZE.COLUMNS}, minmax(0, 1fr))`,
-          }}
-        >
-          {gridItems}
-        </div>
-      </section>
-    </div>
-  );
-}
+export default GridItem;

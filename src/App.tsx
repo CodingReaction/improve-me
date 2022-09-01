@@ -1,6 +1,6 @@
-import Mockup from "../src/Components/Mockup/Mockup";
+import GoalsGridPage from "../src/Components/Pages/GoalsGridPage/GoalsGridPage";
 function App() {
-  return <Mockup />;
+  return <GoalsGridPage />;
 }
 
 export default App;

@@ -1,4 +1,8 @@
-import { GOAL_KIND, GOAL_STATUS, Goal } from "./mockup.types";
+import {
+  GOAL_KIND,
+  GOAL_STATUS,
+  Goal,
+} from "./../../Auxiliar/Types/goal.types";
 
 const MOCKUP_DATA = {
   goals: [
